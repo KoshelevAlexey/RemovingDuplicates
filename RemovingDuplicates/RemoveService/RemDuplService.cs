@@ -69,21 +69,20 @@ namespace RemovingDuplicates.RemoveService
             if(_resultList == null && _resultList.Count == 0)
             {
                 log.Description += "Файл пуст";
-                _logger.Error(log);
-                _resultList = null;
-                return false;
+                _logger.Warn(log);
+                return true;
             }
             try
             {
                 JsonServ.SaveListToJsonFile(fileName, _resultList);
                 log.Description = "Сохранение файла. Объектов: " + _resultList.Count;
                 _logger.Info(log);
+                _resultList = null;
             }
             catch (Exception ex)
             {
                 log.Description = "Ошибка сохранения: " + ex.Message;
                 _logger.Error(log);
-                _resultList = null;
                 return false;
             }
             return true;

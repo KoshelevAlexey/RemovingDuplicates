@@ -61,10 +61,10 @@ namespace RemovingDublicates
             fd.Filter = "JSON | *.json";
             if (fd.ShowDialog() == DialogResult.Cancel) return;
 
-            _service.SaveFile(fd.FileName);
+            bool result = _service.SaveFile(fd.FileName);
+            btnSaveJsonFile.Enabled = !result;
 
             FillLogTable();
-            btnSaveJsonFile.Enabled = false;
         }
 
         private void FillLogTable()
